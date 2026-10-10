@@ -155,3 +155,26 @@ if st.button("🔍 Predict Loan Status"):
 
 st.divider()
 st.caption("College Project | Python • Pandas • Scikit-learn • Streamlit")
+
+st.divider()
+
+st.header("📊 Model Evaluation — Confusion Matrix")
+
+try:
+    confusion_df = pd.read_csv("confusion_matrix.csv")
+
+    st.write("Confusion matrix for the trained model:")
+    st.dataframe(confusion_df, use_container_width=True)
+
+    st.download_button(
+        label="⬇️ Download Confusion Matrix CSV",
+        data=confusion_df.to_csv(index=False),
+        file_name="confusion_matrix.csv",
+        mime="text/csv"
+    )
+
+except FileNotFoundError:
+    st.warning(
+        "confusion_matrix.csv was not found. "
+        "Please check that it is uploaded to the GitHub repository."
+    )
