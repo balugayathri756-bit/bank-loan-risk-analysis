@@ -143,6 +143,35 @@ if st.button("🔍 Predict Loan Status"):
     with result_col2:
         st.metric("Credit Score", credit_score)
 
+st.divider()
+
+st.header("📈 Model Performance")
+
+try:
+    import json
+
+    with open("model_metrics.json", "r") as file:
+        metrics = json.load(file)
+
+    if "accuracy" in metrics:
+        st.metric(
+            "Model Accuracy",
+            f"{metrics['accuracy'] * 100:.2f}%"
+        )
+
+    if "classification_report" in metrics:
+        st.subheader("Classification Report")
+        report_df = pd.DataFrame(
+            metrics["classification_report"]
+        ).transpose()
+        st.dataframe(report_df, use_container_width=True)
+
+except FileNotFoundError:
+    st.info(
+        "Model performance metrics will appear here "
+        "after model_metrics.json is added to GitHub."
+    )
+
     if prediction == 1:
         st.success("✅ Demo Prediction: APPROVED")
         st.balloons()
