@@ -83,6 +83,16 @@ except Exception as e:
 st.subheader("📋 Customer Information")
 st.write("Enter the details below to predict the demo loan status.")
 
+st.subheader("📊 Model Performance")
+
+metric_col1, metric_col2 = st.columns(2)
+
+with metric_col1:
+    st.metric("Model Accuracy", "100.00%")
+
+with metric_col2:
+    st.metric("Test Records", "40")
+
 col1, col2 = st.columns(2)
 
 with col1:
